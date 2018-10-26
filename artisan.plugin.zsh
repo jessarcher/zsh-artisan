@@ -11,7 +11,7 @@ artisan() {
 
     if [ "$_artisan" != "" ]; then
         $_artisan $*
-        return $?
+        return $? # Return the same exit status that artisan returned
     fi
 
     >&2 echo "zsh-artisan: You seem to have upset the delicate internal balance of my housekeeper."
