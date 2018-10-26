@@ -37,7 +37,15 @@ the plugin changes.
 
 Simply use the command `artisan` from anywhere within the directory structure of
 a Laravel project and it will search up the tree for the `artisan` command and
-execute it.
+execute it. E.g:
+
+```zshrc
+$ pwd
+~/MyProject/tests/Feature
+
+$ artisan make:model MyAwesomeModel
+Model created successfully.
+```
 
 Tab-completion will work anywhere that `artisan` can be found, and the available
 commands are retrieved on-demand. This means that you will see any Artisan
