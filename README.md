@@ -1,9 +1,10 @@
 # Laravel artisan plugin for zsh
 
 This plugin adds an `artisan` shell command that will find and execute Laravel's
-artisan command from anywhere within the project.
+`artisan` command from anywhere within the project.
 
-It also adds shell auto-completion that will work anywhere artisan can be found.
+It also adds shell auto-completion that will work anywhere `artisan` can be
+found.
 
 ## Requirements
 
@@ -13,15 +14,15 @@ It also adds shell auto-completion that will work anywhere artisan can be found.
 
 ## Installation
 
-First download the plugin to your oh-my-zsh custom plugin location.
+First download the plugin to your oh-my-zsh custom plugin location:
 
-```sh
+```zsh
 git clone https://github.com/jessarcher/zsh-artisan.git ~/.oh-my-zsh/custom/plugins/artisan
 ```
 
 Then enable the plugin in your `.zshrc` file. For example:
 
-```zshrc
+```zsh
 plugins=(
     artisan
     composer
@@ -40,15 +41,15 @@ execute it.
 
 Tab-completion will work anywhere that `artisan` can be found, and the available
 commands are retrieved on-demand. This means that you will see any Artisan
-commands that are available to you, including any custom Artisan commands that
-may have been defined.
+commands that are available to you, including any custom commands that have
+been defined.
 
 It does not set any aliases, but would like to make some suggestions:
 
 ```zsh
-alias a=artisan
-alias tinker=artisan tinker
-alias serve=artisan serve
+alias a="artisan"
+alias tinker="artisan tinker"
+alias serve="artisan serve"
 ```
 
 Many more can be found at https://laravel-news.com/bash-aliases
