@@ -42,5 +42,5 @@ _artisan_add_completion() {
 }
 
 _artisan_get_command_list() {
-	artisan --raw --no-ansi list | sed "s/[[:space:]].*//g"
+    artisan --raw --no-ansi list | sed "s/[[:space:]].*//g"
 }
