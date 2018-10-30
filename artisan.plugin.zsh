@@ -36,7 +36,7 @@ _artisan_find() {
 }
 
 _artisan_add_completion() {
-    if _artisan_find; then
+    if [ "`_artisan_find`" != "" ]; then
         compadd `_artisan_get_command_list`
     fi
 }
