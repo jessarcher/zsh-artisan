@@ -3,10 +3,10 @@
 This plugin adds an `artisan` shell command with the following features:
 * It will find and execute `artisan` from anywhere within the project file tree
   (and you don't need to prefix it with `php` or `./`)
-* It provides auto-completion for `artisan` commands (that also works anywhere
-  within the project).
-* You can specify an editor to automatically open new files created by
-  `artisan make:*` commands
+* It provides auto-completion for `artisan` commands (that work anywhere within
+  the project).
+* You can specify an editor to automatically open new files created by `artisan
+  make:*` commands
 
 ## Requirements
 
@@ -44,6 +44,11 @@ ARTISAN_OPEN_ON_MAKE_EDITOR=vim
 #ARTISAN_OPEN_ON_MAKE_EDITOR=atom   # Atom (May require shell commands to be enabled)
 #ARTISAN_OPEN_ON_MAKE_EDITOR=code   # VSCode (May require shell commands to be enabled)
 ```
+
+> The author uses [mhinz/neovim-remote](https://github.com/mhinz/neovim-remote),
+combined with a wrapper script, to automatically open files in an existing neovim
+session within the same tmux session, and automatically switch to the correct
+tmux window (tab).
 
 Note that you will need to re-source your `.zshrc` or restart `zsh` to pick up
 the changes.
