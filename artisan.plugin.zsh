@@ -14,8 +14,29 @@ artisan() {
         return 1
     fi
 
+    if [[ $1 = "make:"* && $ARTISAN_OPEN_ON_MAKE_EDITOR != "" ]]; then
+        # Create a temporarily file that we can use to find any files created by artisan
+        _artisan_laravel_path=`dirname $_artisan`
+        _artisan_make_auto_open_tmp_file="$_artisan_laravel_path/.zsh-artisan-make-auto-open"
+        touch $_artisan_make_auto_open_tmp_file
+    fi
+
     $_artisan $*
-    return $? # Return the same exit status that artisan returned
+    _artisan_exit_status=$? # Store the exit status so we can return it later
+
+    if [[ -a $_artisan_make_auto_open_tmp_file ]]; then
+        # Find an open any files created by artisan
+        find $_artisan_laravel_path \
+            -type f \
+            -cnewer $_artisan_make_auto_open_tmp_file \
+            -exec $ARTISAN_OPEN_ON_MAKE_EDITOR {} \; 2>/dev/null
+
+        rm $_artisan_make_auto_open_tmp_file
+        unset _artisan_laravel_path
+        unset _artisan_make_auto_open_tmp_file
+    fi
+
+    return $_artisan_exit_status
 }
 
 compdef _artisan_add_completion artisan
