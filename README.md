@@ -1,16 +1,18 @@
 # Laravel artisan plugin for zsh
 
-This plugin adds an `artisan` shell command that will find and execute Laravel's
-`artisan` command from anywhere within the project.
-
-It also adds shell auto-completion that will work anywhere `artisan` can be
-found.
+This plugin adds an `artisan` shell command with the following features:
+* It will find and execute `artisan` from anywhere within the project file tree
+  (and you don't need to prefix it with `php` or `./`)
+* It provides auto-completion for `artisan` commands (that also works anywhere
+  within the project).
+* You can specify an editor to automatically open new files created by
+  `artisan make:*` commands
 
 ## Requirements
 
 * [zsh](https://www.zsh.org/)
 * [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
-* [Laravel](https://laravel.com/)
+* A [Laravel](https://laravel.com/) project
 
 ## Installation
 
@@ -30,8 +32,21 @@ plugins=(
 )
 ```
 
+If you wish to automatically open new files created by `artisan make:*`
+commands, you will need to configure the `ARTISAN_OPEN_ON_MAKE_EDITOR`
+environment variable. The best place for this is probably also your `.zshrc`
+file. For example:
+
+```zsh
+ARTISAN_OPEN_ON_MAKE_EDITOR=vim
+#ARTISAN_OPEN_ON_MAKE_EDITOR=subl   # Sublime Text
+#ARTISAN_OPEN_ON_MAKE_EDITOR=pstorm # PHPStorm
+#ARTISAN_OPEN_ON_MAKE_EDITOR=atom   # Atom (May require shell commands to be enabled)
+#ARTISAN_OPEN_ON_MAKE_EDITOR=code   # VSCode (May require shell commands to be enabled)
+```
+
 Note that you will need to re-source your `.zshrc` or restart `zsh` to pick up
-the plugin changes.
+the changes.
 
 ## Usage
 
@@ -51,6 +66,10 @@ Tab-completion will work anywhere that `artisan` can be found, and the available
 commands are retrieved on-demand. This means that you will see any Artisan
 commands that are available to you, including any custom commands that have
 been defined.
+
+If you configured the `ARTISAN_OPEN_ON_MAKE_EDITOR` environment variable, any
+files created by `artisan make:*` commands should automatically be opened,
+including when multiple files are created (E.g. by `artisan make:model -m -c -r`)
 
 It does not set any aliases, but would like to make some suggestions:
 
@@ -73,3 +92,6 @@ This project is open-sourced software licensed under the MIT License - see the
   for some of the initial artisan location logic
 * The `laravel5` plugin that comes with oh-my-zsh for the initial completion
   logic
+* [ahuggins/open-on-make](https://github.com/ahuggins/open-on-make) for the
+  "open on make" functionality idea. Unfortunately, adding a dev dependency like
+  this isn't an option on some of the projects I work on.
