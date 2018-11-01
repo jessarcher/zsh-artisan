@@ -9,13 +9,13 @@
 artisan() {
     _artisan=`_artisan_find`
 
-    if [ "$_artisan" != "" ]; then
-        $_artisan $*
-        return $? # Return the same exit status that artisan returned
+    if [ "$_artisan" = "" ]; then
+        >&2 echo "zsh-artisan: You seem to have upset the delicate internal balance of my housekeeper."
+        return 1
     fi
 
-    >&2 echo "zsh-artisan: You seem to have upset the delicate internal balance of my housekeeper."
-    return 1
+    $_artisan $*
+    return $? # Return the same exit status that artisan returned
 }
 
 compdef _artisan_add_completion artisan
