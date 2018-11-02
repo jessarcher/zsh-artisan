@@ -21,7 +21,7 @@ artisan() {
         touch $_artisan_make_auto_open_tmp_file
     fi
 
-    $_artisan $*
+    php $_artisan $*
     _artisan_exit_status=$? # Store the exit status so we can return it later
 
     if [[ -a $_artisan_make_auto_open_tmp_file ]]; then
