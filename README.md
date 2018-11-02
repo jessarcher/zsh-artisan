@@ -1,10 +1,11 @@
 # Laravel artisan plugin for zsh
 
 This plugin adds an `artisan` shell command with the following features:
+
 * It will find and execute `artisan` from anywhere within the project file tree
   (and you don't need to prefix it with `php` or `./`)
-* It provides auto-completion for `artisan` commands (that work anywhere within
-  the project).
+* It provides auto-completion for `artisan` commands (that also work anywhere
+  within the project).
 * You can specify an editor to automatically open new files created by `artisan
   make:*` commands
 
@@ -22,6 +23,9 @@ First download the plugin to your oh-my-zsh custom plugin location:
 git clone https://github.com/jessarcher/zsh-artisan.git ~/.oh-my-zsh/custom/plugins/artisan
 ```
 
+> Note that the repository name is prefixed with `zsh-`, however the plugin
+> directory name should just be "artisan".
+
 Then enable the plugin in your `.zshrc` file. For example:
 
 ```zsh
@@ -32,10 +36,9 @@ plugins=(
 )
 ```
 
-If you wish to automatically open new files created by `artisan make:*`
-commands, you will need to configure the `ARTISAN_OPEN_ON_MAKE_EDITOR`
-environment variable. The best place for this is probably also your `.zshrc`
-file. For example:
+If you wish to automatically open new files created by `artisan make:*` commands
+then you will need to configure the `ARTISAN_OPEN_ON_MAKE_EDITOR` environment
+variable. The best place for this is probably your `.zshrc` file. For example:
 
 ```zsh
 ARTISAN_OPEN_ON_MAKE_EDITOR=vim
@@ -76,7 +79,8 @@ If you configured the `ARTISAN_OPEN_ON_MAKE_EDITOR` environment variable, any
 files created by `artisan make:*` commands should automatically be opened,
 including when multiple files are created (E.g. by `artisan make:model -m -c -r`)
 
-It does not set any aliases, but would like to make some suggestions:
+The plugin does not create any aliases for you, but the author would like to
+offer some suggestions:
 
 ```zsh
 alias a="artisan"
