@@ -9,6 +9,10 @@ This plugin adds an `artisan` shell command with the following features:
 * You can specify an editor to automatically open new files created by `artisan
   make:*` commands
 
+<p align="center">
+    <img src="https://jessarcher.github.io/zsh-artisan/demo.svg">
+</p>
+
 ## Requirements
 
 * [zsh](https://www.zsh.org/)
