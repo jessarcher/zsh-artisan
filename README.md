@@ -10,7 +10,7 @@ This plugin adds an `artisan` shell command with the following features:
   make:*` commands
 
 <p align="center">
-    <img src="https://jessarcher.github.io/zsh-artisan/demo.svg">
+    <img src="https://jessarcher.github.io/zsh-artisan/demo.svg?1">
 </p>
 
 ## Requirements
