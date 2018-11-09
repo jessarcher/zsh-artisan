@@ -43,15 +43,15 @@ compdef _artisan_add_completion artisan
 
 _artisan_find() {
     # Look for artisan up the file tree until the root directory
-    dir=.; until [[ -e $dir/artisan || $dir -ef / ]]; do dir+=/..; done
+    dir=.
+    until [ $dir -ef / ]; do
+        if [ -f "$dir/artisan" ]; then
+            echo "$dir/artisan"
+            return 0
+        fi
 
-    # Get the absolute path
-    app=`readlink -f "$dir/artisan"`
-
-    if [ "$app" != "" ] && [ -f $app ]; then
-        echo "$app"
-        return 0
-    fi
+        dir+=/..
+    done
 
     return 1
 }
