@@ -25,8 +25,11 @@ artisan() {
     _artisan_exit_status=$? # Store the exit status so we can return it later
 
     if [[ -a $_artisan_make_auto_open_tmp_file ]]; then
-        # Find an open any files created by artisan
-        find $_artisan_laravel_path \
+        # Find and open files created by artisan
+        find \
+            "$_artisan_laravel_path/app" \
+            "$_artisan_laravel_path/tests" \
+            "$_artisan_laravel_path/database" \
             -type f \
             -cnewer $_artisan_make_auto_open_tmp_file \
             -exec $ARTISAN_OPEN_ON_MAKE_EDITOR {} \; 2>/dev/null
