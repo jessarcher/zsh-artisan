@@ -21,6 +21,16 @@ This plugin adds an `artisan` shell command with the following features:
 
 ## Installation
 
+### [Antigen](https://github.com/zsh-users/antigen)
+
+Add the following bundle to your `.zshrc`:
+
+```zsh
+antigen bundle jessarcher/zsh-artisan
+```
+
+### Oh-my-zsh
+
 First download the plugin to your oh-my-zsh custom plugin location:
 
 ```zsh
@@ -39,6 +49,8 @@ plugins=(
     git
 )
 ```
+
+## Configuration
 
 If you wish to automatically open new files created by `artisan make:*` commands
 then you will need to configure the `ARTISAN_OPEN_ON_MAKE_EDITOR` environment
