@@ -14,12 +14,12 @@ artisan() {
         return 1
     fi
 
+    _artisan_start_time=`date +%s`
     php $_artisan $*
     _artisan_exit_status=$? # Store the exit status so we can return it later
 
     if [[ $1 = "make:"* && $ARTISAN_OPEN_ON_MAKE_EDITOR != "" ]]; then
         # Find and open files created by artisan
-        _artisan_start_time=`date +%s`
         _artisan_laravel_path=`dirname $_artisan`
         find \
             "$_artisan_laravel_path/app" \
