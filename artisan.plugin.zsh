@@ -14,29 +14,20 @@ artisan() {
         return 1
     fi
 
-    if [[ $1 = "make:"* && $ARTISAN_OPEN_ON_MAKE_EDITOR != "" ]]; then
-        # Create a temporarily file that we can use to find any files created by artisan
-        _artisan_laravel_path=`dirname $_artisan`
-        _artisan_make_auto_open_tmp_file="$_artisan_laravel_path/.zsh-artisan-make-auto-open"
-        touch $_artisan_make_auto_open_tmp_file
-    fi
-
+    _artisan_start_time=`date +%s`
     php $_artisan $*
     _artisan_exit_status=$? # Store the exit status so we can return it later
 
-    if [[ -a $_artisan_make_auto_open_tmp_file ]]; then
+    if [[ $1 = "make:"* && $ARTISAN_OPEN_ON_MAKE_EDITOR != "" ]]; then
         # Find and open files created by artisan
+        _artisan_laravel_path=`dirname $_artisan`
         find \
             "$_artisan_laravel_path/app" \
             "$_artisan_laravel_path/tests" \
             "$_artisan_laravel_path/database" \
             -type f \
-            -cnewer $_artisan_make_auto_open_tmp_file \
+            -newermt "-$((`date +%s` - $_artisan_start_time + 1)) seconds" \
             -exec $ARTISAN_OPEN_ON_MAKE_EDITOR {} \; 2>/dev/null
-
-        rm $_artisan_make_auto_open_tmp_file
-        unset _artisan_laravel_path
-        unset _artisan_make_auto_open_tmp_file
     fi
 
     return $_artisan_exit_status
