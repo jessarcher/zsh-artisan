@@ -34,7 +34,7 @@ antigen bundle jessarcher/zsh-artisan
 First download the plugin to your oh-my-zsh custom plugin location:
 
 ```zsh
-git clone https://github.com/jessarcher/zsh-artisan.git ~/.oh-my-zsh/custom/plugins/artisan
+git clone https://github.com/jessarcher/zsh-artisan.git ${ZSH_CUSTOM1:-$ZSH/custom}/plugins/artisan
 ```
 
 > Note that the repository name is prefixed with `zsh-`, however the plugin
