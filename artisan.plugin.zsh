@@ -6,7 +6,7 @@
 # Laravel's artisan command from anywhere within the project. It also
 # adds shell completions that work anywhere artisan can be located.
 
-artisan() {
+function artisan() {
     _artisan=`_artisan_find`
 
     if [ "$_artisan" = "" ]; then
@@ -35,7 +35,7 @@ artisan() {
 
 compdef _artisan_add_completion artisan
 
-_artisan_find() {
+function _artisan_find() {
     # Look for artisan up the file tree until the root directory
     dir=.
     until [ $dir -ef / ]; do
@@ -50,12 +50,12 @@ _artisan_find() {
     return 1
 }
 
-_artisan_add_completion() {
+function _artisan_add_completion() {
     if [ "`_artisan_find`" != "" ]; then
         compadd `_artisan_get_command_list`
     fi
 }
 
-_artisan_get_command_list() {
+function _artisan_get_command_list() {
     artisan --raw --no-ansi list | sed "s/[[:space:]].*//g"
 }
