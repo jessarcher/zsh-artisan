@@ -14,13 +14,31 @@ function artisan() {
         return 1
     fi
 
+    _artisan_laravel_path=`dirname $_artisan`
+    _artisan_docker_compose=`find $_artisan_laravel_path -maxdepth 1 -regex ".*/docker-compose.ya?ml" | head -n1`
+    _artisan_docker_compose_service=''
+
+    if [ "$_artisan_docker_compose" != '' ]; then
+        _artisan_docker_compose_service=`docker-compose ps --services 2>/dev/null | grep 'app\|php\|api\|workspace' | head -n1`
+    fi
+
     _artisan_start_time=`date +%s`
-    php $_artisan $*
+
+    if [ "$_artisan_docker_compose_service" != '' ]; then
+        if [ -t 1 ]; then
+            docker-compose exec $_artisan_docker_compose_service php artisan $*
+        else
+            # The command is not being run in a TTY (e.g. it's being called by the completion handler below)
+            docker-compose exec -T $_artisan_docker_compose_service php artisan $*
+        fi
+    else
+        php $_artisan $*
+    fi
+
     _artisan_exit_status=$? # Store the exit status so we can return it later
 
     if [[ $1 = "make:"* && $ARTISAN_OPEN_ON_MAKE_EDITOR != "" ]]; then
         # Find and open files created by artisan
-        _artisan_laravel_path=`dirname $_artisan`
         find \
             "$_artisan_laravel_path/app" \
             "$_artisan_laravel_path/tests" \
