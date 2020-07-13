@@ -1,4 +1,6 @@
-# Laravel artisan plugin for zsh
+<p align="center">
+    <img src="https://jessarcher.github.io/zsh-artisan/logo.svg?1" alt="zsh-artisan - Enhanced Laravel integration for zsh" width="400">
+</p>
 
 This plugin adds an `artisan` shell command with the following features:
 
