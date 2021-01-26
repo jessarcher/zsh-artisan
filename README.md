@@ -108,6 +108,22 @@ alias serve="artisan serve"
 
 Many more can be found at https://laravel-news.com/bash-aliases
 
+## Homestead Setup
+
+The Zsh Artisan plugin can be installed automatically with any new or provisioned Laravel Homestead instance. 
+In the root of your Homestead project, add the following to your `after.sh` file. 
+```bash
+ARTISAN=/home/vagrant/.oh-my-zsh/custom/plugins/artisan
+if [ -d "$ARTISAN" ]; then
+  echo "$ARTISAN exist"
+else
+  git clone https://github.com/jessarcher/zsh-artisan.git $ARTISAN
+  sed -i 's/plugins=(git)/plugins=(git composer artisan)/g' /home/vagrant/.zshrc
+  source /home/vagrant/.zshrc
+fi
+```
+*Note:* If you are re-provisioning your Homstead box, and already have other Zsh plugins defined in your Zsh config files, you wil need to adjust the `sed` command to includes those in the list. 
+
 ## License
 
 This project is open-sourced software licensed under the MIT License - see the
