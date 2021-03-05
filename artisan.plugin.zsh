@@ -19,7 +19,7 @@ function artisan() {
     local docker_compose_service_name=''
 
     if [ "$docker_compose_config_path" != '' ]; then
-        docker_compose_service_name=`docker-compose ps --services 2>/dev/null | grep 'app\|php\|api\|workspace\|laravel\.test' | head -n1`
+        docker_compose_service_name=`docker-compose ps --services 2>/dev/null | grep 'app\|php\|api\|workspace\|laravel\.test\|webhost' | head -n1`
     fi
 
     local artisan_start_time=`date +%s`
