@@ -6,6 +6,11 @@
 # Laravel's artisan command from anywhere within the project. It also
 # adds shell completions that work anywhere artisan can be located.
 
+# Uses "docker compose" instead of "docker-compose" if latter is not found. 
+if ! [ -x "$(command -v docker-compose)" ]; then
+    alias docker-compose='docker compose'
+fi
+
 function artisan() {
     local artisan_path=`_artisan_find`
 
