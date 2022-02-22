@@ -36,8 +36,10 @@ function artisan() {
 compdef _artisan_add_completion artisan
 
 function _artisan_find() {
+    # Starts search from "src" folder if it exists
+    if [ -d src ]; then dir=./src; else dir=.; fi
+    
     # Look for artisan up the file tree until the root directory
-    dir=.
     until [ $dir -ef / ]; do
         if [ -f "$dir/artisan" ]; then
             echo "$dir/artisan"
