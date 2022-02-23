@@ -17,8 +17,8 @@ This plugin adds an `artisan` shell command with the following features:
 
 ## Requirements
 
-* [zsh](https://www.zsh.org/)
-* [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
+* [Zsh](https://www.zsh.org/)
+* A Zsh package manager (e.g. [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh), [Antigen](https://github.com/zsh-users/antigen), or [Zplug](https://github.com/zplug/zplug))
 * A [Laravel](https://laravel.com/) project
 
 ## Installation
@@ -50,6 +50,14 @@ plugins=(
     composer
     git
 )
+```
+
+### Zplug
+
+Add the following to your `.zshrc`:
+
+```zsh
+zplug "jessarcher/zsh-artisan"
 ```
 
 ## Configuration
