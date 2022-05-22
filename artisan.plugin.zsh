@@ -10,7 +10,7 @@ function artisan() {
     local artisan_path=`_artisan_find`
 
     if [ "$artisan_path" = "" ]; then
-        >&2 echo "zsh-artisan: You seem to have upset the delicate internal balance of my housekeeper."
+        >&2 echo "zsh-artisan: artisan not found. Are you in a Laravel directory?"
         return 1
     fi
 
