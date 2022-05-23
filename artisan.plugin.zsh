@@ -15,7 +15,7 @@ function artisan() {
     fi
 
     local laravel_path=`dirname $artisan_path`
-    local docker_compose_config_path=`find $laravel_path -maxdepth 1 -regex ".*/docker-compose.ya?ml" | head -n1`
+    local docker_compose_config_path=`find $laravel_path -maxdepth 1 \( -name "docker-compose.yml" -o -name "docker-compose.yaml" \) | head -n1`
     local artisan_cmd
 
     if [ "$docker_compose_config_path" = '' ]; then
