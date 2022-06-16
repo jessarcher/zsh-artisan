@@ -33,6 +33,14 @@ Add the following bundle to your `.zshrc`:
 antigen bundle jessarcher/zsh-artisan
 ```
 
+### [Fig](https://fig.io)
+
+Fig adds apps, shortcuts, and autocomplete to your existing terminal.
+
+Install `artisan` in just one click.
+
+<a href="https://fig.io/plugins/other/zsh-artisan_jessarcher" target="_blank"><img src="https://fig.io/badges/install-with-fig.svg" /></a>
+
 ### Oh-my-zsh
 
 First download the plugin to your oh-my-zsh custom plugin location:
