@@ -18,19 +18,21 @@ function artisan() {
     local docker_compose_config_path=`find $laravel_path -maxdepth 1 \( -name "docker-compose.yml" -o -name "docker-compose.yaml" \) | head -n1`
     local artisan_cmd
 
-    if [ "$docker_compose_config_path" = '' ]; then
-        artisan_cmd="php $artisan_path"
-    else
-        if [ "`grep "laravel/sail" $docker_compose_config_path | head -n1`" != '' ]; then
+    artisan_cmd="php $artisan_path"
+
+    if [ "$docker_compose_config_path" != '' ]; then
+        if [ "`grep -P -i "^(?:(?!.*#.*).)+image:\ssail-.+\/app.*$" $docker_compose_config_path | head -n1`" != '' ]; then
             artisan_cmd="$laravel_path/vendor/bin/sail artisan"
         else
             local docker_compose_cmd=`_docker_compose_cmd`
             local docker_compose_service_name=`$docker_compose_cmd ps --services 2>/dev/null | grep 'app\|php\|api\|workspace\|laravel\.test\|webhost' | head -n1`
-            if [ -t 1 ]; then
-                artisan_cmd="$docker_compose_cmd exec $docker_compose_service_name php artisan"
-            else
-                # The command is not being run in a TTY (e.g. it's being called by the completion handler below)
-                artisan_cmd="$docker_compose_cmd exec -T $docker_compose_service_name php artisan"
+            if [ "$docker_compose_service_name" != '' ]; then
+                if [ -t 1 ]; then
+                    artisan_cmd="$docker_compose_cmd exec $docker_compose_service_name php artisan"
+                else
+                    # The command is not being run in a TTY (e.g. it's being called by the completion handler below)
+                    artisan_cmd="$docker_compose_cmd exec -T $docker_compose_service_name php artisan"
+                fi
             fi
         fi
     fi
