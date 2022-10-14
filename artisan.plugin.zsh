@@ -19,7 +19,7 @@ function artisan() {
     local artisan_cmd
 
     if [ "$docker_compose_config_path" = '' ]; then
-        artisan_cmd="php $artisan_path"
+        artisan_cmd="$artisan_path"
     else
         if [ "`grep "laravel/sail" $docker_compose_config_path | head -n1`" != '' ]; then
             artisan_cmd="$laravel_path/vendor/bin/sail artisan"
