@@ -15,10 +15,12 @@ function artisan() {
     fi
 
     local laravel_path=`dirname $artisan_path`
+
     local docker_compose_config_path=`find $laravel_path -maxdepth 1 \( -name "docker-compose.yml" -o -name "docker-compose.yaml" \) | head -n1`
+
     local artisan_cmd
 
-    if [ "$docker_compose_config_path" = '' ]; then
+    if [ "$docker_compose_config_path" = '' ] || ! _has_php_service "$docker_compose_config_path"; then
         artisan_cmd="php $artisan_path"
     else
         if [ "`grep "laravel/sail" $docker_compose_config_path | head -n1`" != '' ]; then
@@ -88,5 +90,14 @@ function _docker_compose_cmd() {
         echo "docker compose"
     else
         echo "docker-compose"
+    fi
+}
+
+function _has_php_service() {
+    local docker_compose_config_path=$1
+    if grep -q 'php:' "$docker_compose_config_path"; then
+        return 0
+    else
+        return 1
     fi
 }
