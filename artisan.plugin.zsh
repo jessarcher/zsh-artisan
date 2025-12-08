@@ -35,9 +35,19 @@ function artisan() {
         fi
     fi
 
+    local artisan_subcmd=$1
+    shift
+
+    local artisan_args=()
+    local arg
+    for arg in $@
+    do
+        artisan_args+=($(printf "%s" "$arg" | sed "s/'/'\\\\''/g;1s/^/'/;\$s/\$/'/"))
+    done
+
     local artisan_start_time=`date +%s`
 
-    eval $artisan_cmd $*
+    eval $artisan_cmd $artisan_subcmd $artisan_args
 
     local artisan_exit_status=$? # Store the exit status so we can return it later
 
