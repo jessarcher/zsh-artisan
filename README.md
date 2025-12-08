@@ -46,7 +46,7 @@ Install `artisan` in just one click.
 First download the plugin to your oh-my-zsh custom plugin location:
 
 ```zsh
-git clone https://github.com/jessarcher/zsh-artisan.git ~/.oh-my-zsh/custom/plugins/artisan
+git clone https://github.com/jessarcher/zsh-artisan.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/artisan
 ```
 
 > Note that the repository name is prefixed with `zsh-`, however the plugin
