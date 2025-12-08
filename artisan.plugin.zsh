@@ -25,7 +25,7 @@ function artisan() {
             artisan_cmd="$laravel_path/vendor/bin/sail artisan"
         else
             local docker_compose_cmd=`_docker_compose_cmd`
-            local docker_compose_service_name=`$docker_compose_cmd ps --services 2>/dev/null | grep 'app\|php\|api\|workspace\|laravel\.test\|webhost' | head -n1`
+            local docker_compose_service_name=`$=docker_compose_cmd ps --services 2>/dev/null | grep 'app\|php\|api\|workspace\|laravel\.test\|webhost' | head -n1`
             if [ -t 1 ]; then
                 artisan_cmd="$docker_compose_cmd exec $docker_compose_service_name php artisan"
             else
